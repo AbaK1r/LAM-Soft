@@ -1,0 +1,1 @@
+cecum_t1_a cecum_t2_a cecum_t3_a sigmoid_t3_a trans_t2_a trans_t3_a trans_t4_a

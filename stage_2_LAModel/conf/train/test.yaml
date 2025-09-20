@@ -1,0 +1,33 @@
+# model
+model_name: pps_net
+
+# data
+dataset: colon_depth
+input_size: 448
+train_batch_size: 16
+val_batch_size: 1
+num_workers: 16
+
+# train
+weight_decay: 1e-4
+lr: 3e-5  # 其他层的lr
+lr_backbone: 3e-5  # backbone的lr
+lr_scheduler: reduce
+
+# trainer
+trainer:
+    max_epochs: 200
+    accelerator: gpu
+    devices: 1  # 多卡训练时设置显卡数量
+    benchmark: true
+#    strategy: ddp_find_unused_parameters_true  # 如果多卡训练就要开
+#    profiler: simple
+    check_val_every_n_epoch: 2  # 每训练几轮验证一次
+    precision: 32-true  # 32-true or 16-mixed 训练精度，16-mixed可以提速，如果loss出nan了就改32-true
+    logger: true
+#    limit_train_batches: 2
+#    limit_test_batches: 0.0
+    enable_progress_bar: true  # 开关进度条
+    gradient_clip_val: 0.5
+#    detect_anomaly: true
+#    accumulate_grad_batches: 2

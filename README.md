@@ -16,7 +16,7 @@ By introducing a dynamic **Lighting Adjustment Model (LAM)** and **confidence-aw
 *   **Clinically Validated Superior Performance**: Achieves SOTA results on the C3VD dataset and reduces the mean absolute error for polyp size estimation on the SUN database by 47% compared to the PPSNet baseline.
 *   **Lightweight & Real-Time**: Engineered for efficiency, the model supports real-time processing at up to 71 FPS, making it ideal for seamless integration into clinical colonoscopy workflows.
 
-## 📊 Performance Benchmarks (Based on Paper Results)
+## 📊 Performance Benchmarks
 
 ### Depth Estimation Performance on C3VD Dataset
 
@@ -45,11 +45,11 @@ git clone https://github.com/your_username/LAM-Soft.git
 cd LAM-Soft
 
 # Create and activate a conda environment
-conda create -n lamsoft python=3.9
+conda create -n lamsoft python=3.12
 conda activate lamsoft
 
 # Install PyTorch (adjust the CUDA version as needed)
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126
 
 # Install other dependencies
 pip install -r requirements.txt
@@ -64,34 +64,42 @@ This project requires the following datasets:
 
 Download and extract the datasets into the `datasets/` directory at the project root, structured as follows:
 ```
-LAM-Soft/
+LAM-Soft/datasets
+├── C3VD
+│   ├── cecum_t1_a
+│   ├── cecum_t1_b
+│   ├── cecum_t2_a
+│   ├── cecum_t2_b
+│   ├── cecum_t2_c
+│   ├── cecum_t3_a
+│   ├── cecum_t4_a
+│   ├── cecum_t4_b
+│   ├── desc_t4_a
+│   ├── desc_t4_a_p1
+│   ├── desc_t4_a_p2
+│   ├── seq1
+│   ├── seq2
+│   ├── seq3
+│   ├── seq4
+│   ├── sigmoid_t1_a
+│   ├── sigmoid_t2_a
+│   ├── sigmoid_t3_a
+│   ├── sigmoid_t3_b
+│   ├── trans_t1_a
+│   ├── trans_t1_b
+│   ├── trans_t2_a
+│   ├── trans_t2_b
+│   ├── trans_t2_c
+│   ├── trans_t3_a
+│   ├── trans_t3_b
+│   ├── trans_t4_a
+│   ├── trans_t4_b
+│   └── cfhq190l_10x10mm_checkerboard_images
+└── ClinicalData
+    └── RawFrames
 ```
 
-### 3. Training the Model
 
-```bash
-# Train the teacher model on the C3VD dataset
-python train_teacher.py --config config/teacher_config.yaml
-
-# Train the student model (LAM-Soft) using the semi-supervised framework
-python train_student.py --config config/student_config.yaml
-```
-
-### 4. Evaluating the Model
-
-```bash
-# Evaluate depth estimation performance
-python evaluate_depth.py --model_path path/to/your/model.pth --dataset C3VD
-
-# Evaluate polyp size estimation performance
-python evaluate_polyp_size.py --model_path path/to/your/model.pth --dataset SUN
-```
-
-## 📁 Project Structure
-
-```
-LAM-Soft/
-```
 
 ---
 

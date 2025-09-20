@@ -2,8 +2,6 @@
 
 # LAM-Soft: Semi-Supervised Colonoscopy Depth Estimation via Lighting Adjustment Model-Driven Soft Labels
 
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org/)
-
 > **Project**: LAM-Soft: Semi-Supervised Colonoscopy Depth Estimation via Lighting Adjustment Model-Driven Soft Labels
 > **Authors**: Xiheng Wu, Zhaolin Zhang, Zhe Xu, Entong Liu, Dongya Chen, Bishi He
 

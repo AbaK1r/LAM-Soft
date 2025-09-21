@@ -33,7 +33,7 @@ def main(cfg: DictConfig):
         os.system(f'cp main.py {str(dst_dir / "main.py")}')
     args = cfg.train
     model = ModuleInterface(**args)
-    ddir = 'lightning_logs/version_47/checkpoints/last.ckpt'
+    # ddir = 'lightning_logs/version_47/checkpoints/last.ckpt'
     # model = ModuleInterface.load_from_checkpoint(checkpoint_path=ddir, **args)
     # model.load_state_dict(torch.load(ddir)['state_dict'], strict=True)
     # model.model.load_pretrained()

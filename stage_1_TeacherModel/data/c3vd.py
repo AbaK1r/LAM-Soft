@@ -16,13 +16,18 @@ def load_pose(data_seq_path: Path):
 class C3vd(Dataset):
     def __init__(self, data_mode='train', input_size=336, **kwargs):
         super().__init__()
+        # intrinsics = np.array([
+        #     [767.3638647587969, 0, 544.0626504570412],
+        #     [0, 767.4796480626248, 543.6409955105457],
+        #     [0, 0, 1]
+        # ]).astype(np.float32)
+        # intrinsics[0, :] = intrinsics[0, :] * (input_size / 1080)
+        # intrinsics[1, :] = intrinsics[1, :] * (input_size / 1080)
         intrinsics = np.array([
-            [767.3638647587969, 0, 544.0626504570412],
-            [0, 767.4796480626248, 543.6409955105457],
-            [0, 0, 1]
-        ]).astype(np.float32)
-        intrinsics[0, :] = intrinsics[0, :] * (input_size / 1080)
-        intrinsics[1, :] = intrinsics[1, :] * (input_size / 1080)
+            [0.51, 0., 0.5],
+            [0., 0.51, 0.5],
+            [0., 0., 1.]
+        ], dtype=np.float32)
         self.intrinsics = intrinsics.astype(np.float32)
         self.n_intrinsics = OF.pixel_intrinsics_to_normalized_intrinsics(
             torch.from_numpy(intrinsics).unsqueeze(0).float(), (input_size,)*2).squeeze(0)
@@ -37,14 +42,13 @@ class C3vd(Dataset):
             #     transforms.RandomAutocontrast(p=0.9),
             #     # 随机地改变图像的亮度和色调。亮度因子从[0.5, 1.5]之间均匀地选择，色调因子从[-0.3, 0.3]之间均匀地选择。
             #     transforms.RandomApply(transforms=[transforms.ColorJitter(brightness=0.5, hue=0.3)], p=0.6),
-            #     # 这里变换列表中只有一个变换，就是随机旋转图像，角度为0到60度之间
             #     transforms.RandomApply(transforms=[transforms.GaussianBlur(3, 0.1)], p=0.6),
             # ])
             self.data_enhance = None
         else:
             self.data_enhance = None
 
-        with open(f'/data/2t/jupyter/wxh/PPSNetSup/task/c3vd/{self.data_mode}.txt', 'r') as f:
+        with open(f'task/c3vd/{self.data_mode}.txt', 'r') as f:
             self.img_root_dirs = f.readline().strip().split(' ')
 
         self.image_path_ls = []

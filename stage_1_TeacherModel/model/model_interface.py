@@ -129,9 +129,9 @@ class ModuleInterface(pl.LightningModule):
         else:
             weight_decay = 1e-4
         param_dicts = [
-            {"params": [p for n, p in self.named_parameters() if "mask_head" not in n and p.requires_grad]},
+            {"params": [p for n, p in self.named_parameters() if "pretrained" not in n and p.requires_grad]},
             {
-                "params": [p for n, p in self.named_parameters() if "mask_head" in n and p.requires_grad],
+                "params": [p for n, p in self.named_parameters() if "pretrained" in n and p.requires_grad],
                 "lr": self.hparams.lr_backbone,
             },
         ]

@@ -4,6 +4,7 @@ lightning_logs/
 op/
 multirun/
 ultralytics/
+datasets/
 
 # PyCharm IDE configurations
 .idea/
